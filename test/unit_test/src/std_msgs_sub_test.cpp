@@ -45,11 +45,3 @@ int main(int argc, char *argv[])
   RclCppFixture g_rclcppfixture(argc, argv);
   return RUN_ALL_TESTS();
 }
-
-// Reference: https://stackoverflow.com/questions/65300353/google-test-gtest-expect-true-macro-wont-compile-with-stdis-same-te
-/**
- * 
- * colcon test --event-handlers console_direct+ --packages-select ros2-gtest
- * options: console_cohesion+  console_package_list+  console_stderr-  console_direct+  console_start_end-
- * 
- */

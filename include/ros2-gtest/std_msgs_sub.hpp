@@ -1,6 +1,10 @@
 #ifndef ROS2_GTEST_STD_MSGS_SUB_HPP
 #define ROS2_GTEST_STD_MSGS_SUB_HPP
 
+// STL
+#include <memory>
+
+// ROS2
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
 

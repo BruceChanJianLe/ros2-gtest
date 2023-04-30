@@ -1,6 +1,10 @@
 #ifndef ROS2_GTEST_STD_MSGS_PUB_HPP
 #define ROS2_GTEST_STD_MSGS_PUB_HPP
 
+// STL
+#include <memory>
+
+// ROS2
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
 
@@ -11,6 +15,7 @@ namespace gtest
   class Pub2
   {
   public:
+    using Ptr = std::shared_ptr<Pub2>;
     explicit Pub2(rclcpp::Node::SharedPtr n);
     ~Pub2();
     void run();
