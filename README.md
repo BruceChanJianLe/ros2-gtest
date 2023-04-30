@@ -2,10 +2,16 @@
 
 This repository demonstrates the implementation of using gtest in ROS2.
 
+The available examples are as follow:
+- [x] rclcpp node test 
+- [ ] rclcpp lifecycle node test
+- [ ] component node test
+
 ## Running
 
 ```bash
 colcon test --event-handlers console_direct+ --packages-select ros2-gtest
+# options: console_cohesion+  console_package_list+  console_stderr-  console_direct+  console_start_end-
 # Alternatively, you could use the alias
 cct ros2-gtest
 ```
