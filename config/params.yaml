@@ -1,0 +1,4 @@
+pub2_node:
+  ros__parameters:
+    data: false
+    rate: 1
