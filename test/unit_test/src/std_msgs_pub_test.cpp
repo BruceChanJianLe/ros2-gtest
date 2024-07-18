@@ -12,7 +12,8 @@ public:
 
 struct Pub2TestFixture : public ::testing::Test
 {
-  Pub2TestFixture() : node_{nullptr}, pub2{nullptr}, data_{false} {}
+  Pub2TestFixture()
+    : node_{nullptr}, pub2{nullptr}, data_{false}, is_test_over_{false} {}
   virtual ~Pub2TestFixture() = default;
 
   rclcpp::Node::SharedPtr node_;
@@ -20,6 +21,7 @@ struct Pub2TestFixture : public ::testing::Test
   rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr sub_;
   bool data_;
   std::thread spinner_;
+  bool is_test_over_;
 
 protected:
   virtual void SetUp() override
@@ -33,18 +35,30 @@ protected:
           RCLCPP_INFO_STREAM(this->node_->get_logger(), "I hear pub2 says " << msg->data << "!");
           this->data_ = msg->data;
         });
-      spinner_ = std::thread([this](){ rclcpp::spin(this->node_); });
+
+      spinner_ = std::thread([this]() {
+          rclcpp::executors::MultiThreadedExecutor executor;
+          executor.add_node(node_->get_node_base_interface());
+          while(rclcpp::ok() && !is_test_over_)
+            {
+              executor.spin_some();
+              // rclcpp::spin_once(node_);
+              std::this_thread::sleep_for(std::chrono::milliseconds {500});
+            }
+      });
   }
 
   virtual void TearDown() override
   {
-    ;
+    if (spinner_.joinable()) spinner_.join();
   }
 };
 
 TEST_F(Pub2TestFixture, publishTrue)
 {
   std::this_thread::sleep_for(std::chrono::milliseconds {2000});
+  is_test_over_ = true;
+  std::this_thread::sleep_for(std::chrono::milliseconds {1000});
   ASSERT_TRUE(data_);
 }
 
