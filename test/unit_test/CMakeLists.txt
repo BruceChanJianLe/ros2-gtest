@@ -7,7 +7,11 @@ set(PKG_NAME ${PROJECT_NAME})
 set(TEST_FILES
   src/std_msgs_sub_test.cpp
 )
-ament_add_gtest_executable(std_msgs_sub_test ${TEST_FILES})
+ament_add_gtest(std_msgs_sub_test ${TEST_FILES})
+target_include_directories(std_msgs_sub_test PUBLIC ../../include
+  # $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  # $<INSTALL_INTERFACE:include>
+)
 target_link_libraries(std_msgs_sub_test ${PROJECT_NAME}_lib)
 
 add_ros_test(launch/std_msgs_sub_test.launch.py ARGS
@@ -20,7 +24,11 @@ add_ros_test(launch/std_msgs_sub_test.launch.py ARGS
 set(TEST_FILES
   src/std_msgs_pub_test.cpp
 )
-ament_add_gtest_executable(std_msgs_pub_test ${TEST_FILES})
+# target_include_directories(std_msgs_pub_test PUBLIC ../../include
+  # $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  # $<INSTALL_INTERFACE:include>
+# )
+ament_add_gtest(std_msgs_pub_test ${TEST_FILES})
 target_link_libraries(std_msgs_pub_test ${PROJECT_NAME}_lib)
 
 add_ros_test(launch/std_msgs_pub_test.launch.py ARGS

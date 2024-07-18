@@ -10,10 +10,13 @@ The available examples are as follow:
 ## Running
 
 ```bash
-colcon test --event-handlers console_direct+ --packages-select ros2-gtest
+# For all launch.py tests with color
+GTEST_COLOR=1 colcon test --event-handlers console_direct+ --ctest-args -R "launch.py" --packages-select ros2-gtest
 # options: console_cohesion+  console_package_list+  console_stderr-  console_direct+  console_start_end-
 # Alternatively, you could use the alias
 cct ros2-gtest
+# Only gtest
+GTEST_COLOR=1 colcon test --event-handlers console_direct+ --ctest-args -R "test" --packages-select ros2-gtest
 ```
 
 ## References
