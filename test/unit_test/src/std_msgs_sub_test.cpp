@@ -32,7 +32,7 @@ struct Sub2TestFixture : public ::testing::Test
 
 TEST_F(Sub2TestFixture, receiveTrue)
 {
-  std::this_thread::sleep_for(std::chrono::milliseconds {1000});
+  std::this_thread::sleep_for(std::chrono::milliseconds {2000});
   rclcpp::spin_some(node_);
   auto result = sub2->getData();
   ASSERT_TRUE(result);
