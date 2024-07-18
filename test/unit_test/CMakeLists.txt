@@ -8,10 +8,7 @@ set(TEST_FILES
   src/std_msgs_sub_test.cpp
 )
 ament_add_gtest(std_msgs_sub_test ${TEST_FILES})
-target_include_directories(std_msgs_sub_test PUBLIC ../../include
-  # $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  # $<INSTALL_INTERFACE:include>
-)
+target_include_directories(std_msgs_sub_test PUBLIC ../../include)
 target_link_libraries(std_msgs_sub_test ${PROJECT_NAME}_lib)
 
 add_ros_test(launch/std_msgs_sub_test.launch.py ARGS
@@ -24,11 +21,8 @@ add_ros_test(launch/std_msgs_sub_test.launch.py ARGS
 set(TEST_FILES
   src/std_msgs_pub_test.cpp
 )
-# target_include_directories(std_msgs_pub_test PUBLIC ../../include
-  # $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  # $<INSTALL_INTERFACE:include>
-# )
 ament_add_gtest(std_msgs_pub_test ${TEST_FILES})
+target_include_directories(std_msgs_pub_test PUBLIC ../../include)
 target_link_libraries(std_msgs_pub_test ${PROJECT_NAME}_lib)
 
 add_ros_test(launch/std_msgs_pub_test.launch.py ARGS
@@ -36,3 +30,10 @@ add_ros_test(launch/std_msgs_pub_test.launch.py ARGS
   "SRC_DIR:=${SRC_DIR}"
   "PKG_NAME:=${PKG_NAME}"
 )
+
+# circular buffer unit test
+set(TEST_FILES
+  ./src/circular_buffer_unit_test.cpp
+)
+ament_add_gtest(circular_buffer_unit_test ${TEST_FILES})
+target_include_directories(circular_buffer_unit_test PUBLIC ../../include)

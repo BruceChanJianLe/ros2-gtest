@@ -9,14 +9,18 @@ The available examples are as follow:
 
 ## Running
 
+For all launch.py tests with color
 ```bash
 # For all launch.py tests with color
 GTEST_COLOR=1 colcon test --event-handlers console_direct+ --ctest-args -R "launch.py" --packages-select ros2-gtest
 # options: console_cohesion+  console_package_list+  console_stderr-  console_direct+  console_start_end-
-# Alternatively, you could use the alias
+# Alternatively, you could use the alias (https://github.com/BruceChanJianLe/dotfiles/blob/6b69476a06e7e2858ecd269b9e8a07e91624d66c/.bash_aliases#L43)
 cct ros2-gtest
-# Only gtest
-GTEST_COLOR=1 colcon test --event-handlers console_direct+ --ctest-args -R "test" --packages-select ros2-gtest
+```
+
+For circular buffer unit test
+```bash
+GTEST_COLOR=1 colcon test --event-handlers console_direct+ --ctest-args -R "circular_buffer" --packages-select ros2-gtest
 ```
 
 ## References
